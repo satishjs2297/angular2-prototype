@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.westat.navigator.poc</groupId>
+		<artifactId>navigator-poc-hub</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../navigator-poc-hub/pom.xml</relativePath>
+	</parent>
+
+	<artifactId>navigator-poc-webapp</artifactId>
+	<packaging>war</packaging>
+
+	<name>navigator-poc-webapp</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<jetty.version>9.3.5.v20151012</jetty.version>
+		<locaadmin.version>1.0-SNAPSHOT</locaadmin.version>
+		<jstl.version>1.2</jstl.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- local-admin-impl -->
+		<dependency>
+			<groupId>com.westat.navigator.poc</groupId>
+			<artifactId>navigator-poc-impl</artifactId>
+			<version>${locaadmin.version}</version>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+
+		<!-- jsp-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+
+	<build>
+		<finalName>local-admin-webapp</finalName>
+		<plugins>
+
+
+			<!-- Jetty maven plugin for local deployment -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>${jetty.version}</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+</project>

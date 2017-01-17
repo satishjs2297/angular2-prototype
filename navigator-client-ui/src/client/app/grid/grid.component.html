@@ -1,0 +1,54 @@
+<div>
+<p-dataTable #dt [value]="userProfiles" selectionMode="single" [(selection)]="selectedCar" (onRowSelect)="onRowSelect($event)" [rows]="10" 
+  [paginator]="true" [globalFilter]="gb" exportFilename="userProfiles" [responsive]="true" [stacked]="stacked" sortMode="multiple">
+    <header>
+        User List
+        <div class="ui-helper-clearfix">
+            <button type="button" pButton icon="fa-file-o" iconPos="left" label="CSV" (click)="dt.exportCSV()" style="float:left"></button>
+            <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Add"></button>
+        </div>
+    </header>    
+    
+    <p-column field="userId" header="User Id (No Filter)" [filter]="true" [sortable]="true" filterMatchMode="equals">
+        <template pTemplate="filter" let-col>
+            <i class="fa fa-close" (click)="userIdFilter=null;dt.filter(null,col.field,col.filterMatchMode)"></i>
+            <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="userIdFilter" [min]="1" [max]="40" (onSlideEnd)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-slider>
+        </template>
+    </p-column>
+
+    <p-column field="userName" header="User Name (startsWith) " [filter]="true" [sortable]="true" filterPlaceholder="Search">
+    </p-column>
+    <p-column field="firstName" header="First Name " [filter]="true" [sortable]="true" filterPlaceholder="Search"></p-column>
+
+    <p-column field="emailId" header="Email Id " [filter]="true" [sortable]="true" filterPlaceholder="Search"> </p-column>
+
+    <footer>Footer</footer>
+</p-dataTable>
+<p-dialog header="User Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid ui-grid-pad" *ngIf="userProfile">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="userId">User Id</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="userId" [(ngModel)]="userProfile.userId" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="userName">User Name</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="userName" [(ngModel)]="userProfile.userName" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="firstName">First Name</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="firstName" [(ngModel)]="userProfile.firstName" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="emailId">Email Id</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="emailId" [(ngModel)]="userProfile.emailId" /></div>
+        </div>
+    </div>
+    <footer>
+        <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+            <button type="button" pButton icon="fa-close" (click)="delete()" label="Delete"></button>
+            <button type="button" pButton icon="fa-check" (click)="save()" label="Save"></button>
+        </div>
+    </footer>
+</p-dialog>
+</div>
+<br>

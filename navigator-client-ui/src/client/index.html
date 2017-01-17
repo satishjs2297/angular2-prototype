@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="<%= APP_BASE %>">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title><%= APP_TITLE %></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
+
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
+<body>
+
+  <sd-app>Loading...</sd-app>
+
+<footer align="center">
+
+    <div class="wrap">
+			<ul class="cross-agency">
+				<li>
+					<a href="http://www.cancer.gov" target="_blank"><img src="/cgb/images/footer/nci-logo-small.png" alt="National Cancer Institute" /></a>
+				</li>
+				<li>
+					<a href="http://www.hhs.gov" target="_blank"><img src="/cgb/images/footer/hhs-logo-small.png" alt="U.S. Department of Health and Human Services" /></a>
+				</li>
+				<li>
+					<a href="http://www.nih.gov" target="_blank"><img src="/cgb/images/footer/nih-logo-small.png" alt="National Institute of Health"></a>
+				</li>
+				<li>
+					<a href="http://www.usa.gov" target="_blank"><img src="/cgb/images/footer/usagov-logo-small.png" alt="USA.gov" /></a>
+				</li>
+			</ul>
+            <p class="version">
+                Navigator Backend v1.10
+            </p>
+            <p class="copyright">
+                Copyright &copy; 2013 National Cancer Institute (NCI). All Rights Reserved.
+            </p>
+		</div>
+</footer> 
+
+  <script>
+  // Fixes undefined module function in SystemJS bundle
+  function module() {}
+  </script>
+
+  <!-- shims:js -->
+  <!-- endinject -->
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script src="<%= APP_BASE %>app/system-config.js"></script>
+  <% } %>
+
+  <!-- libs:js -->
+  <!-- endinject -->
+
+  <!-- inject:js -->
+  <!-- endinject -->
+
+  <% if (BUILD_TYPE === 'dev') { %>
+  <script>
+  System.import('<%= BOOTSTRAP_MODULE %>')
+    .catch(function (e) {
+      console.error(e.stack || e,
+        'Oops! Ran into an exception...contact Kasi!');
+    });
+  </script>
+  <% } %>
+
+</body>
+</html>
